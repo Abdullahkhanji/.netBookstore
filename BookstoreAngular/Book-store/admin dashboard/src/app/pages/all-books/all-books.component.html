@@ -1,0 +1,99 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>All books</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Pages</li>
+        <li class="breadcrumb-item active">All books</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="col-12">
+      <div class="card top-selling overflow-auto">
+        <div class="card-body pb-0">
+          <div class="d-flex">
+            <h3 class="card-title">Books</h3>
+            <button class="btn btn-primary m-3 ms-auto" routerLink="/add-book">
+              Add book
+            </button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Book Cover</th>
+                <th scope="col">Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Page Count</th>
+                <th scope="col">Downloads</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of List">
+                <th scope="row">
+                  <!-- <a
+                    ><img
+                      width="70px"
+                      height="100px"
+                      src="{{ book.selectedImage }}"
+                      alt=""
+                  /></a> -->
+                </th>
+                <td>
+                  <a class="text-primary"> {{ book.title }} </a>
+                </td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.pageCount }}</td>
+                <td>{{ book.downloadCount }}</td>
+                <td>
+                  <i
+                    routerLink="/edit-book/{{ book.id }}"
+                    class="bi bi-pencil h4 px-3"
+                  ></i>
+                  <i
+                    type="button"
+                    (click)="setId(book.id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#verticalycentered"
+                    class="bi bi-trash h4"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal fade" id="verticalycentered" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Are you sure to delete this book?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          (click)="deleteBook(bookId)"
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<div>
+    <router-outlet (activate)="fadeOut()" ></router-outlet>
+</div>
+
+<div *ngIf="spinner" id="loader-container" class="loader-container">
+    <img src="./assets/image/loader.gif" alt="">
+</div>
+
+<app-footer></app-footer>
+
+
+
+
+

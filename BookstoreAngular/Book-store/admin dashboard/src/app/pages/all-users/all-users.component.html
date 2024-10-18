@@ -1,0 +1,98 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>All users</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Pages</li>
+        <li class="breadcrumb-item active">All users</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="col-12">
+      <div class="card top-selling overflow-auto">
+        <div class="card-body pb-0">
+          <h5 class="card-title">Users</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">profile</th>
+                <th scope="col">Username</th>
+                <th scope="col">Uplouded books count</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let user of usersList">
+              <tr>
+                <th scope="row">
+                  <a
+                    ><img
+                      class="rounded-circle"
+                      width="70px"
+                      height="80px"
+                      src="{{ user.profilePic }}"
+                      alt=""
+                  /></a>
+                </th>
+                <td>
+                  <a class="text-primary">{{ user.email }}</a>
+                </td>
+                <td>{{ user.uploudedBooks }}</td>
+                <td>
+                  <select
+                    #Roles
+                    [(ngModel)]="user.admin"
+                    (change)="onChange(Roles.value, user)"
+                    class="form-select w-75"
+                  >
+                    <option value="false">User</option>
+                    <option value="true">Admin</option>
+                  </select>
+                </td>
+                <td>
+                  <i
+                  (click)="setId(user.uid)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#verticalycentered"
+                    class="bi bi-trash h4"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal fade" id="verticalycentered" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Are you sure to delete this user?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          (click)="removeUser(userId)"
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

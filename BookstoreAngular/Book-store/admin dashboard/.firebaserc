@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "book-store-34554"
+  },
+  "targets": {
+    "book-store-34554": {
+      "hosting": {
+        "admindashboard": [
+          "book-store-admin-34554"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

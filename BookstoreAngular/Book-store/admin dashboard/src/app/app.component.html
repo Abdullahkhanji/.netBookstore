@@ -1,0 +1,14 @@
+<div *ngIf="_router.url == '/pages-login'">
+  <router-outlet></router-outlet>
+</div>
+<div *ngIf="_router.url != '/pages-login'">
+  <div *ngIf="_router.url != '/error404'">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+  <div *ngIf="_router.url == '/error404'">
+    <router-outlet></router-outlet>
+  </div>
+</div>

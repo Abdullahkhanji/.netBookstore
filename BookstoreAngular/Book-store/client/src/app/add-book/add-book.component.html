@@ -1,0 +1,118 @@
+<section style="margin-top: 12rem">
+  <h1 class="text-center mb-5">
+    <span class="border py-2 px-5 rounded">add book</span>
+  </h1>
+
+  <div
+    class="d-flex align-items-center justify-content-center bg-white h-100 w-100"
+  >
+    <form
+      style="min-width: 380px; width: 75%"
+      [formGroup]="addBookForm"
+      (ngSubmit)="addBook()"
+    >
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1">Book Name </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="book name"
+          formControlName="name"
+          name="name"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1">Author </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="author"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          formControlName="author"
+          name="author"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1">Publisher </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Publisher"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          formControlName="publisher"
+          name="publisher"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1"
+          >Publication Date</span
+        >
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Publication date"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          formControlName="publicationDate"
+          name="publicationDate"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1">Page Count</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="page count"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          formControlName="pageCount"
+          name="pageCount"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text h3" id="basic-addon1">Dedscription</span>
+        <textarea
+          class="form-control"
+          placeholder="description"
+          aria-label="description"
+          formControlName="description"
+          name="description"
+        ></textarea>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-text h3" id="basic-addon1">Book Cover</span>
+        <input
+          type="file"
+          class="form-control"
+          id="inputGroupFile04"
+          aria-describedby="inputGroupFileAddon04"
+          aria-label="Upload"
+          accept=".png,.jpg"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-text h3" id="basic-addon1">Book PDF</span>
+        <input
+          type="file"
+          class="form-control"
+          id="inputGroupFile04"
+          aria-describedby="inputGroupFileAddon04"
+          aria-label="Upload"
+          accept=".pdf"
+          (change)="onChangeFile($event)"
+        />
+      </div>
+      <button class="btn" type="submit">Add Book</button>
+    </form>
+  </div>
+</section>

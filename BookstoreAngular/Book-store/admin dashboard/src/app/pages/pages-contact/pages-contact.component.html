@@ -1,0 +1,139 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Contact</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Pages</li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section contact">
+    <div class="row gy-4">
+      <div class="col-xl-10 d-flex justify-content-center">
+        <div class="card p-4">
+          <form
+            action="forms/contact.php"
+            method="post"
+            class="php-email-form"
+            [formGroup]="contactData"
+            (ngSubmit)="addContactData()"
+          >
+            <div class="gy-4">
+              <div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-telephone"></i>
+                      <h3>Call Us</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="tel"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="phone"
+                            value="{{ data.phone }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-envelope"></i>
+                      <h3>Email Us</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="email"
+                            value="{{ data.email }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-facebook"></i>
+                      <h3>Facebook</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="facebook"
+                            value="{{ data.facebook }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-twitter"></i>
+                      <h3>Twitter</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="twitter"
+                            value="{{ data.twitter }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-instagram"></i>
+                      <h3>Instagram</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="instagram"
+                            value="{{ data.instagram }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="info-box card">
+                      <i class="bi bi-pinterest"></i>
+                      <h3>Pinterest</h3>
+                      <div class="mb-3">
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputText"
+                            formControlName="pinterest"
+                            value="{{ data.pinterest }}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 text-center">
+                <button type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

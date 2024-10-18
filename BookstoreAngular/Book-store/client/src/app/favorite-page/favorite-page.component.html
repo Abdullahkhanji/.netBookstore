@@ -1,0 +1,22 @@
+<section class="favorite-page" style="margin-top: 12rem">
+  <!-- <h1 class="heading"><span>favorite page</span></h1> -->
+  <h1 class="text-center mb-5">
+    <span class="border py-2 px-5 rounded">favorite page</span>
+  </h1>
+
+  <div class="d-flex flex-wrap">
+    <div class="book-box me-5" *ngFor="let book of favoriteList">
+      <div class="icons">
+        <div (click)="onDown(book.fileUrl, book.id)" class="fa fa-download h1 py-2 px-3"></div>
+        <div href="#" class="fa fa-book-open h1 py-2 px-3"></div>
+      </div>
+      <div class="image p-2">
+        <img style="height: 25rem" src="{{ book.coverUrl }}" alt="" />
+      </div>
+      <div class="content">
+        <h3>{{ book.name }}</h3>
+        <a href="#" class="btn">remove</a>
+      </div>
+    </div>
+  </div>
+</section>

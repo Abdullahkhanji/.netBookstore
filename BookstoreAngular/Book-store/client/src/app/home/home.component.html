@@ -1,0 +1,208 @@
+<!-- home section starts  -->
+
+<section class="welcome" id="welcome">
+  <div class="d-flex align-items-center flex-wrap row">
+    <div class="col">
+      <h1 class="text-dark">Welcome to Bookly!</h1>
+
+      <div *ngIf="isLoggedIn">
+        <h4 class="text-muted py-2">
+          read and Download your favorite books on Bookly!
+        </h4>
+        <a routerLink="/addBook" class="btn flex-grow-1">Add book</a>
+
+      </div>
+      <div *ngIf="!isLoggedIn">
+        <h4 class="text-muted py-2">
+          Login quickly and read your favorite books on Bookly!
+        </h4>
+        <a routerLink="/login" class="btn flex-grow-1">Login</a>
+      </div>
+
+    </div>
+
+    <div class="swiper text-align-center mt-4 col" id="books-slider">
+      <div class="swiper-wrapper">
+        <swiper
+          [loop]="true"
+          [autoplay]="{
+            delay: 2500,
+            disableOnInteraction: false
+          }"
+          [spaceBetween]="10"
+          [breakpoints]="{
+            '@0.00': {
+              slidesPerView: 1,
+              spaceBetween: 10
+            },
+            '@0.75': {
+              slidesPerView: 2,
+              spaceBetween: 20
+            },
+            '@1.00': {
+              slidesPerView: 3,
+              spaceBetween: 40
+            },
+            '@1.50': {
+              slidesPerView: 4,
+              spaceBetween: 50
+            }
+          }"
+          class="mySwiper"
+        >
+          <ng-template swiperSlide *ngFor="let book of latestBooks"
+            ><a routerLink="/bookView/{{book.id}}" href="#" class="swiper-slide"
+              ><img
+                class="slider-book"
+                src="{{ book.selectedImage }}"
+                alt="" /></a
+          ></ng-template>
+        </swiper>
+      </div>
+      <img src="./assets/image/bookstand.png" class="w-100" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- home section ense  -->
+
+<!-- latest section starts -->
+
+<section id="latest">
+  <h1 class="heading"><span>Latest books</span></h1>
+
+  <div class="swiper featured-slider">
+    <div class="swiper-wrapper">
+      <swiper
+        [navigation]="true"
+        [loop]="true"
+        [autoplay]="{
+          delay: 5000,
+          disableOnInteraction: false
+        }"
+        [spaceBetween]="10"
+        [breakpoints]="{
+          '@0.00': {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          '@0.75': {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          '@1.00': {
+            slidesPerView: 3,
+            spaceBetween: 40
+          },
+          '@1.50': {
+            slidesPerView: 4,
+            spaceBetween: 50
+          }
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide *ngFor="let book of latestBooks">
+          <div class="book-box">
+            <div class="icons">
+              <div (click)="onDown(book.selectedFile, book.id)" class="fa fa-download h1 py-2 px-3"></div>
+              <div href="#" (click)="addToFavorite(book.id)" class="fa fa-heart h1 py-2 px-3"></div>
+            </div>
+            <div routerLink="/bookView/{{book.id}}" class="image p-2">
+              <img
+                style="height: 25rem"
+                src="{{ book.selectedImage }}"
+                alt=""
+              />
+            </div>
+            <div routerLink="/bookView/{{book.id}}" class="content">
+              <h3>{{ book.name }}</h3>
+              <a class="btn">View book</a>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>
+<!-- latest section ends -->
+
+<!-- mostDownloaded section starts  -->
+
+<section id="mostDownloaded">
+  <h1 class="heading"><span>Most Downloaded</span></h1>
+
+  <div class="swiper featured-slider">
+    <div class="swiper-wrapper">
+      <swiper
+        [navigation]="true"
+        [loop]="true"
+        [autoplay]="{
+          delay: 5000,
+          disableOnInteraction: false
+        }"
+        [spaceBetween]="10"
+        [breakpoints]="{
+          '@0.00': {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          '@0.75': {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          '@1.00': {
+            slidesPerView: 3,
+            spaceBetween: 40
+          },
+          '@1.50': {
+            slidesPerView: 4,
+            spaceBetween: 50
+          }
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide *ngFor="let book of mostDownloaded">
+          <div class="book-box" >
+            <div class="icons">
+              <div (click)="onDown(book.selectedFile, book.id)" class="fa fa-download h1 py-2 px-3"></div>
+              <div href="#" (click)="addToFavorite(book.id)" class="fa fa-heart h1 py-2 px-3"></div>
+            </div>
+            <div routerLink="/bookView/{{book.id}}" class="image p-2">
+              <img
+                style="height: 25rem"
+                src="{{ book.selectedImage }}"
+                alt=""
+              />
+            </div>
+            <div routerLink="/bookView/{{book.id}}" class="content">
+              <h3>{{ book.name }}</h3>
+              <a class="btn">View book</a>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>
+
+<!-- mostDownloaded section ends -->
+
+<!-- newsletter section starts -->
+
+<section class="newsletter">
+  <form class="newsletter-form">
+    <div class="mw-50 ms-auto align-items-end py-5">
+      <h3 class="text-white pb-2">subscribe for latest updates</h3>
+      <input
+        type="email"
+        name=""
+        placeholder="enter your email"
+        id=""
+        class="form-control"
+      />
+      <input type="submit" value="subscribe" class="btn" />
+    </div>
+  </form>
+</section>
+
+<!-- newsletter section ends -->

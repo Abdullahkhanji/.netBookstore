@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "admindashboard",
+    "public": "dist/admindashboard",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

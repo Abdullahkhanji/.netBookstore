@@ -1,0 +1,82 @@
+<header class="header border">
+  <div
+    class="d-flex align-items-center justify-content-between"
+    style="padding: 1.5rem 9%; background: rgba(255, 255, 255, 0.575)"
+  >
+    <p
+      routerLink="home"
+      class="h1 font-weight-bold user-select-all text-secondary"
+      style="cursor: pointer"
+    >
+      <i class="fa fa-book text-success pe-auto"></i> bookly
+    </p>
+    <form
+      action=""
+      class="w-50 h-25 border rounded overflow-hidden d-flex align-items-center bg-white"
+    >
+      <input
+        class="h4 p-3 h-100 w-100"
+        type="search"
+        name=""
+        placeholder="search here..."
+        id="search-box"
+      />
+      <div id="search-btn" class="fa fa-search h1 me-4 pe-auto"></div>
+    </form>
+
+    <div class="d-flex align-items-center">
+      <div class="fa fa-bell h1 ms-5 pe-auto"></div>
+      <div
+        *ngIf="isLoggedIn"
+        routerLink="favoritePage"
+        class="logged-in fa fa-heart h1 ms-5 pe-auto"
+      ></div>
+      <div *ngIf="isLoggedIn">
+        <button
+          style="background: rgba(255, 255, 255, 0.575)"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+        >
+          <i class="logged-in fa fa-user h1 ms-5 pe-auto"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <div routerLink="profile">
+              <i class="fa fa-user me-2"></i><span>Profile</span>
+            </div>
+          </button>
+
+          <button mat-menu-item>
+            <div (click)="logout()">
+              <i class="fa fa-sign-out me-2"></i><span>Logout</span>
+            </div>
+          </button>
+        </mat-menu>
+      </div>
+      <div
+        *ngIf="!isLoggedIn"
+        routerLink="login"
+        class="logged-out h2 ms-5 pe-auto"
+      >
+        Log in
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-green">
+    <nav class="text-center">
+      <div>
+        <a class="nav-item" href="#welcome">Home</a>
+        <a class="nav-item" href="#latest">Latest</a>
+        <a class="nav-item" href="#mostDownloaded">Most downloaded</a>
+        <a class="nav-item" routerLink="allBooks">Books List</a>
+      </div>
+    </nav>
+  </div>
+  <nav class="bottom-navbar">
+    <a href="#welcome" class="fas fa-home"></a>
+    <a routerLink="allBooks" class="fas fa-list"></a>
+    <a href="#mostDownloaded" class="fas fa-tags"></a>
+    <a href="#latest" class="fas fa-comments"></a>
+  </nav>
+</header>

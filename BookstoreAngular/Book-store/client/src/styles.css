@@ -1,0 +1,219 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all 0.2s linear;
+  transition: width none;
+}
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #219150;
+}
+
+section {
+  padding: 5rem 9%;
+}
+a {
+  text-decoration: none;
+}
+.btn {
+  margin: 1rem 0;
+  display: inline-block;
+  padding: 0.9rem 3rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  background-color: #27ae60;
+  font-size: 1.7rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn:hover {
+  background-color: #219150;
+}
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.heading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 0.01rem;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+.heading span {
+  font-size: 3rem;
+  padding: 0.5rem 2rem;
+  color: black;
+  background: #fff;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+.header {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+.border {
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+.pe-auto:hover {
+  color: #27ae60;
+  cursor: pointer;
+}
+.bg-green {
+  background-color: #27ae60;
+  display: block;
+}
+.bottom-navbar {
+  text-align: center;
+  background: var(--green);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #27ae60;
+  display: none;
+}
+
+.bottom-navbar a {
+  font-size: 2.5rem;
+  padding: 2rem;
+  color: #fff;
+}
+
+.bottom-navbar a:hover {
+  background: var(--dark-color);
+}
+.slider-book {
+  height: 25rem;
+  z-index: 1;
+}
+.slider-book:hover {
+  transform: scale(0.9);
+}
+.book-box {
+  max-width: 350px;
+  margin: 2rem 0;
+  overflow: hidden;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background: linear-gradient(10deg, #eee 50%, #fff 50.1%);
+}
+.book-box:hover {
+  border: 0.1rem solid black;
+}
+.book-box:hover .image {
+  transform: translateY(4rem);
+}
+.book-box .icons {
+  border-bottom: 0.1rem solid black;
+  transform: translateY(-105%);
+}
+.book-box:hover .icons {
+  transform: translateY(0%);
+}
+.book-box .icons div:hover {
+  background-color: #27ae60;
+  color: #fff;
+}
+.newsletter-form {
+  width: 40%;
+  margin-left: 65%;
+}
+.form-control {
+  margin: 0.7rem 0;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  color: black;
+  border-radius: 0.5rem;
+  text-transform: none;
+}
+
+.form-control:focus {
+  border-color: #27ae60;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #27ae60;
+}
+
+.share {
+  padding: 1rem 0;
+  text-align: center;
+}
+.share a {
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #27ae60;
+  margin: 0 0.3rem;
+  border-radius: 50%;
+}
+.share a:hover {
+  background: black;
+}
+
+.input-group span {
+  width: 170px;
+  margin: 0.7rem 0;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  color: black;
+  border-radius: 0.5rem;
+  text-transform: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media (max-width: 630px) {
+  .welcome{
+    margin-top: 7rem !important;
+  }
+  .header form{
+    display: none !important;
+  }
+  .bg-green {
+    display: none;
+  }
+  .bottom-navbar {
+    display: block;
+  }
+}

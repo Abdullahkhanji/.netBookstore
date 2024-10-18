@@ -1,0 +1,167 @@
+<section style="margin-top: 12rem">
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-4 border-end">
+        <div class="d-flex flex-column align-items-center text-center p-3">
+          <div class="profile-pic">
+            <label class="-label" for="file">
+              <span>Change Image</span>
+            </label>
+            <input id="file" accept=".png,.jpg" type="file" (change)="loadFile($event)" />
+            <img src="{{ data.profilePic }}" id="output" width="200" />
+          </div>
+          <span class="font-weight-bold"></span>{{ data.firstName }} {{ data.surname }}<span>
+            <br> {{ data.email }} </span>
+        </div>
+      </div>
+
+      <div class="container col-md-8 border-start px-5">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button   
+            class="nav-link active text-success"
+            id="nav-home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-home"
+            type="button"
+            role="tab"
+            aria-controls="nav-home"
+            aria-selected="true"
+          >
+            profile
+          </button>
+          <button
+            class="nav-link text-success"
+            id="nav-profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-profile"
+            type="button"
+            role="tab"
+            aria-controls="nav-profile"
+            aria-selected="false"
+          >
+            your books
+          </button>
+        </div>
+
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="nav-home"
+            role="tabpanel"
+            aria-labelledby="nav-home-tab"
+          >
+          
+            <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label>First Name</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    placeholder="first name"
+                    formControlName="firstName"
+                    value="{{ data.firstName}}"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label>Surname</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    value="{{ data.surname }}"
+                    placeholder="surname"
+                    formControlName="surname"
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label class="labels">Mobile Number</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    placeholder="enter phone number"
+                    value="{{ data.phoneNumber }}"
+                    formControlName="phoneNumber"
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Birth Date</label
+                  ><input
+                    type="date"
+                    class="form-control"
+                    formControlName="birthDate"
+                    value="{{ data.birthDate }}"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Address</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  placeholder="enter address"
+                  formControlName="address"
+                  value="{{ data.address }}"
+                />
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label class="labels">Country</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    placeholder="country"
+                    formControlName="country"
+                    value="{{ data.country }}"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="labels">State/Region</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    placeholder="state"
+                    formControlName="State"
+                    value="{{ data.State }}"
+                  />
+                </div>
+              </div>
+              <div class="mt-5">
+                <button class="btn" type="submit">Save Profile</button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="nav-profile"
+            role="tabpanel"
+            aria-labelledby="nav-profile-tab"
+          >
+            <div class="text-end">
+              <a routerLink="/addBook" class="btn">Add book</a>
+            </div>
+            <div class="d-flex flex-wrap">
+              <div *ngFor="let book of favoriteList" routerLink="/bookView/{{book.id}}" class="book-box me-5">
+                <div class="icons">
+                  <div href="#" class="fa fa-download h1 py-2 px-3"></div>
+                  <div href="#" class="fa fa-heart h1 py-2 px-3"></div>
+                  <div href="#" class="fa fa-eye h1 py-2 px-3"></div>
+                </div>
+                <div class="image p-2">
+                  <img style="height: 25rem; width: 18rem; margin: 5px 10px;" src="{{ book.selectedImage }}" alt="" />
+                </div>
+                <div class="content">
+                  <h3>{{ book.name }}</h3>
+                  <a href="{{ book.selectedFile }}" target="_blank">
+                    <button class="btn">view book</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

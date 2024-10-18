@@ -1,0 +1,122 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Add Book</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Pages</li>
+        <li class="breadcrumb-item active">Add Book</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Add book</h5>
+
+            <form [formGroup]="addBookForm" (ngSubmit)="addBook() ">
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label"
+                  >Book Name</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                    name="name"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label"
+                  >Author</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="author"
+                    name="author"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label"
+                  >Publisher</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="publisher"
+                    name="publisher"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputDate" class="col-sm-2 col-form-label"
+                  >Publication Date</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="publicationDate"
+                    name="publicationDate"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label"
+                  >Page Count</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="pageCount"
+                    name="pageCount"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <textarea
+                    class="form-control"
+                    style="height: 100px"
+                    formControlName="description"
+                    name="descreption"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label"
+                  >Book Cover
+                </label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="file" id="formFile" accept=".png,.jpg" (change)="onFileSelected($event)" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label"
+                  >Book PDF
+                </label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="file" id="formFile" accept=".pdf" (change)="onChangeFile($event)"/>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Add book</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

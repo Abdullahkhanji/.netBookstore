@@ -1,0 +1,32 @@
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+  display: none;
+}
+
+.selectdiv:after {
+  color: #333;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+
+  top: 18px;
+  padding: 0 0 2px;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #333;
+  background-image: none;
+  font-family: 'FontAwesome', 'Second Font name'
+}

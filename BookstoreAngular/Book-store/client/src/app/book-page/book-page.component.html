@@ -1,0 +1,59 @@
+<section class="product" style="margin-top: 15rem">
+  <div class="row">
+    <div class="col mw-100 mb-5">
+      <img
+        class="border border-success rounded"
+        src="{{ data.selectedImage }}"
+        alt=""
+        height="90%"
+        width="50%"
+        style="min-width: 350px; min-height: 450;"
+      />
+    </div>
+    <div class="col my-5">
+      <h1 style="font-size: 50px">{{ data.name }}</h1>
+      <h2 class="px-5 py-3">
+        author: <span class="text-secondary">{{ data.author }}</span>
+      </h2>
+      <h2 class="px-5 py-3">
+        Publisher: <span class="text-secondary">{{ data.publisher }}</span>
+      </h2>
+      <h2 class="px-5 py-3">
+        Publication date:
+        <span class="text-secondary">{{ data.publicationDate }}</span>
+      </h2>
+      <h2 class="px-5 py-3">
+        page count: <span class="text-secondary">{{ data.pageCount }}</span>
+      </h2>
+      <h2 class="px-5 py-3">
+        <span class="text-secondary h4">{{ data.description }}</span>
+      </h2>
+
+      <div class="mt-5 d-flex">
+        <button class="btn me-5 my-5" (click)="onDown(data)">
+          Download book
+        </button>
+
+        <button (click)="viewBook()" class="btn my-5">view book</button>
+        <div *ngIf="!view_fav"
+          (click)="addToFavorite()"
+          id="fa-heart-circle-plus"
+          class="fa fa-heart-circle-plus my-5 mx-5"
+        ></div> 
+        <div *ngIf="view_fav"
+          (click)="removeFromFavorite()"
+          id="fa-heart-circle-minus"
+          class="fa fa-heart-circle-minus my-5 mx-5"
+        ></div>
+      </div>
+    </div>
+    <div *ngIf="view_book" id="book-viewer">
+      <i (click)="hideBook()" class="fa-solid fa-xmark pe-auto"></i>
+      <ngx-doc-viewer
+        url="{{ data.selectedFile }}"
+        viewer="google"
+        class="book-viewer"
+      ></ngx-doc-viewer>
+    </div>
+  </div>
+</section>

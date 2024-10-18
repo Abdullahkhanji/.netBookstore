@@ -1,0 +1,62 @@
+<section style="margin-top: 12rem">
+  <h1 class="text-center mb-5">
+    <span class="border py-2 px-5 rounded">all books</span>
+  </h1>
+
+  <div class="d-flex justify-content-between">
+    <form
+      class="w-50 h-25 border rounded overflow-hidden d-flex align-items-center bg-white"
+    >
+      <input
+        class="h4 p-3 h-100 w-100"
+        type="search"
+        placeholder="search for your favorite book ... "
+        id="search-box"
+        #search (change)="onSearch(search.value)"
+      />
+      <div id="search-btn" class="fa fa-search h1 me-4 pe-auto"></div>
+    </form>
+
+    <div class="selectdiv">
+      <label>
+        <select #Sort (change)="onChange(Sort.value)">
+          <option value="none" selected>&#xf0dc;
+            Sort 
+          </option>
+          <option value="download_no">Download Count</option>
+          <option value="publicationDate">Publication Date</option>
+          <option value="view_no">View Count</option>
+        </select>
+      </label>
+    </div>
+
+
+  </div>
+
+  <div class="d-flex flex-wrap">
+    <div
+      *ngFor="let book of filteredList"
+      routerLink="/bookView/{{ book.id }}"
+      class="book-box me-5"
+    >
+      <div class="icons">
+        <div (click)="onDown(book.selectedFile, book.id)" class="fa fa-download h1 py-2 px-3"></div>
+        <div href="#" class="fa fa-heart h1 py-2 px-3"></div>
+        <div href="#" class="fa fa-eye h1 py-2 px-3"></div>
+      </div>
+      <div class="image p-2">
+        <img
+          style="height: 25rem; width: 18rem; margin: 5px 10px"
+          src="{{ book.selectedImage }}"
+          alt=""
+        />
+      </div>
+      <div class="content">
+        <h3>{{ book.name }}</h3>
+        <a href="{{ book.selectedFile }}" target="_blank">
+          <button class="btn">view book</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

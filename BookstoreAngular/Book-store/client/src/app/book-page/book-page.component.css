@@ -1,0 +1,19 @@
+.book-viewer{
+    width: 70%;
+    height: 900px;
+    margin: auto;
+}
+.fa-xmark{
+    font-size: 40px;
+    float: right;
+    margin-right: 50px;
+
+}
+.fa{
+    font-size: 35px;
+    color: #27ae60;
+    cursor: pointer;
+}
+.fa:hover{
+    color: black;
+}

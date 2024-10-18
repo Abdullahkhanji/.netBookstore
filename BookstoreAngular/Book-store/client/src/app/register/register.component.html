@@ -1,0 +1,42 @@
+
+
+<!-- login form  -->
+
+<div
+  class="d-flex align-items-center justify-content-center bg-white h-100 w-100"
+  style="margin-top: 20rem"
+>
+  <form style="min-width: 400px;" class="bg-white border rounded w-25 p-5 m-5 " action="">
+    <h1 class="text-center text-uppercase pb-4 fw-bond">Register</h1>
+
+    <div class="ms-3 align-items-center justify-content-center">
+      <span class="d-block h4 pt-2">Email</span>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-control w-100"
+        placeholder="Email"
+        #email
+      />
+      <span class="d-block h4 pt-2">Password</span>
+      <input
+        type="password"
+        name="password"
+        class="form-control w-100"
+        placeholder="Password"
+        #password
+      />
+      <div class="form-check py-3 h5">
+        <input class="form-check-input" type="checkbox" name="" id="remember-me" />
+        <label class="form-check-label" for="remember-me"> remember me</label>
+      </div>
+      <!-- <input type="submit" value="register" class="btn w-100" /> -->
+      <button class="btn w-100" type="submit" (click)="register(email.value, password.value)" >register</button>
+    </div>
+
+    <p class="pt-2 text-secondry h5 " >already have an account ? <a routerLink="/login">sign in</a></p>
+  </form>
+</div>
+
+
