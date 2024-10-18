@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BookstoreAPI",
+    "\\BookstoreAPI\\Controllers",
+    "\\BookstoreAPI\\Modals",
+    "\\BookstoreAPI\\Properties"
+  ],
+  "SelectedNode": "\\BookstoreAPI\\Controllers\\BookController.cs",
+  "PreviewInSolutionExplorer": false
+}
