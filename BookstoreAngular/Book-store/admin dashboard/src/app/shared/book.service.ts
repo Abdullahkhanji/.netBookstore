@@ -10,7 +10,7 @@ import { catchError, map } from 'rxjs';
 export class BookService {
   constructor(private http: HttpClient) {}
   List: Book[] = [];
-  url = environment.apiBaseURL + 'api/Book'
+  url = environment.apiBaseURL + 'api/Book';
   getAllBooks = () => {
     return this.http.get<Book[]>(this.url).pipe(
       map((res: Book[]) => {
@@ -32,7 +32,7 @@ export class BookService {
       },
     });
   };
-  deleteBook(id: number){
+  deleteBook(id: number) {
     this.http.delete(this.url + `/${id}`).subscribe({
       next: (res) => {
         console.log(res);
@@ -41,6 +41,28 @@ export class BookService {
       error: (err) => {
         console.log(err);
       },
-    })
+    });
+  }
+  getBookInfo(id: number) {
+    return this.http.get<Book>(this.url + `/${id}`).pipe(
+      map((res: Book) => {
+        return res;
+      }),
+      catchError((err) => {
+        console.error(err);
+        throw err; // rethrow the error for the caller to handle if needed
+      })
+    );
+  }
+  editBook(id: number, book: any) {
+    this.http.put(this.url + `/${id}`, book).subscribe({
+      next: (res) => {
+        console.log(res);
+        location.reload();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

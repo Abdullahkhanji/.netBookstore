@@ -27,7 +27,7 @@
                       class="form-control"
                       formControlName="name"
                       name="name"
-                      value="{{ data.name}}"
+                      value="{{ data.title }}"
                     />
                   </div>
                 </div>
@@ -97,11 +97,11 @@
                       style="height: 100px"
                       formControlName="description"
                       name="descreption"
-                      value="{{ data.descreption}}"
+                      value="{{ data.description}}"
                     ></textarea>
                   </div>
                 </div>
-                <div class="row mb-3">
+                <!-- <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label"
                     >Book Cover
                   </label>
@@ -116,7 +116,7 @@
                   <div class="col-sm-10">
                     <input class="form-control" type="file" id="formFile" accept=".pdf" (change)="onChangeFile($event)"/>
                   </div>
-                </div>
+                </div> -->
   
                 <button class="btn btn-primary" type="submit">Save Changes</button>
               </form>

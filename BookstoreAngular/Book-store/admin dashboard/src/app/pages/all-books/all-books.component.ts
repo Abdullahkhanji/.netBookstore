@@ -24,7 +24,6 @@ export class AllBooksComponent implements OnInit {
   constructor(private elementRef: ElementRef, public service: BookService) {}
 
   ngOnInit(): void {
-    this.readBooks();
     this.getBooks();
     var s = document.createElement('script');
     s.type = 'text/javascript';
@@ -57,30 +56,30 @@ export class AllBooksComponent implements OnInit {
     });
   }
 
-  async readBooks() {
-    let db = getFirestore();
-    let snapshot = await getDocs(collection(db, 'books'));
+  // async readBooks() {
+  //   let db = getFirestore();
+  //   let snapshot = await getDocs(collection(db, 'books'));
 
-    snapshot.forEach((doc) => {
-      let index: any = doc.data();
-      index.key = doc.id;
-      this.booksList.push(index);
-      const storage = getStorage();
-      const storageRef = ref(storage, doc.data()['bookCover']);
-      const fileRef = ref(storage, doc.data()['bookPDF']);
-      getDownloadURL(fileRef).then((url: any) => {
-        index.selectedFile = url;
-      });
-      getDownloadURL(storageRef).then((url) => {
-        console.log(url);
-        index.selectedImage = url;
-      });
-      getDownloadURL(fileRef).then((url) => {
-        index.selectedFile = url;
-      });
-      this.data = index;
-    });
-  }
+  //   snapshot.forEach((doc) => {
+  //     let index: any = doc.data();
+  //     index.key = doc.id;
+  //     this.booksList.push(index);
+  //     const storage = getStorage();
+  //     const storageRef = ref(storage, doc.data()['bookCover']);
+  //     const fileRef = ref(storage, doc.data()['bookPDF']);
+  //     getDownloadURL(fileRef).then((url: any) => {
+  //       index.selectedFile = url;
+  //     });
+  //     getDownloadURL(storageRef).then((url) => {
+  //       console.log(url);
+  //       index.selectedImage = url;
+  //     });
+  //     getDownloadURL(fileRef).then((url) => {
+  //       index.selectedFile = url;
+  //     });
+  //     this.data = index;
+  //   });
+  // }
   setId(id: any) {
     this.bookId = id;
   }

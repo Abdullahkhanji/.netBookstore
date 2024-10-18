@@ -12,6 +12,8 @@ import {
   getDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { Book } from 'src/app/shared/book.model';
+import { BookService } from 'src/app/shared/book.service';
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
@@ -20,101 +22,96 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 export class EditBookComponent implements OnInit {
   storage = getStorage();
   imageURL: any;
-  fileURL: any
-  selectedImage: any
-  selectedFile: any
+  fileURL: any;
+  selectedImage: any;
+  selectedFile: any;
   id: any;
-  data: any;
+  data: Book = {
+    title: '',
+    author: '',
+    publisher: '',
+    publicationDate: '',
+    pageCount: 0,
+    description: '',
+    cover: '',
+    pdfFile: '',
+    uid: 0,
+    uploudDate: '',
+    downloadCount: 0,
+    viewCount: 0
+  };
 
   constructor(
     private formBuilder: FormBuilder,
-    private _Activatedroute: ActivatedRoute
+    private _Activatedroute: ActivatedRoute,
+    public service: BookService
   ) {
     this.id = this._Activatedroute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    this.getBookData();
-    console.log(this.id);
+    this.getBookData()
+
+    // console.log(this.id);
   }
 
-  onChangeImage(event: any) {
-    this.selectedImage = event.target.files[0];
-  }
-  onChangeFile(event: any) {
-    this.selectedFile = event.target.files[0];
-
-  }
+  // onChangeImage(event: any) {
+  //   this.selectedImage = event.target.files[0];
+  // }
+  // onChangeFile(event: any) {
+  //   this.selectedFile = event.target.files[0];
+  // }
   async getBookData() {
-    const storage = getStorage();
-    let db = getFirestore();
-    let docRef = doc(db, 'books', this.id);
-    let docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      this.data = docSnap.data();
-      console.log(this.data)
-      this.setFormValue()
-    } else {
-      console.log('No such document!');
-    }
+    this.service.getBookInfo(this.id).subscribe({
+      next: (book: Book) => {
+        this.data = book;
+        console.log(this.data)
+        this.setFormValue();
+      },
+      error: (err: any) => {
+        console.error('Error fetching books', err);
+      },
+    });
+
+
   }
 
   editBookForm = this.formBuilder.group({
-    name: '',
-    author: '',
-    publisher: '',
-    publicationDate: '',
-    pageCount: '',
-    description: '',
-    bookCover: '',
-    bookPDF: '',
+    name: this.data.title,
+    author: this.data.author,
+    publisher: this.data.publisher,
+    publicationDate: this.data.publicationDate,
+    pageCount: this.data.pageCount,
+    description: this.data.description,
   });
   setFormValue() {
-    this.editBookForm.setValue({
-      name: this.data.name,
+    this.editBookForm.patchValue({
+      name: this.data.title,
       author: this.data.author,
       publisher: this.data.publisher,
       publicationDate: this.data.publicationDate,
       pageCount: this.data.pageCount,
       description: this.data.description,
-      bookCover: this.data.bookCover,
-      bookPDF: this.data.bookPDF,
     });
   }
   async editBook() {
-    let db = getFirestore();
 
-    if (this.selectedImage) {
-      const storageRef = ref(
-        this.storage,
-        `book-cover/${this.selectedImage.name}`
-      );
-      uploadBytes(storageRef, this.selectedImage);
-      this.imageURL = storageRef.fullPath
-    } else{
-      this.imageURL = this.data.bookCover
-    }
-    if (this.selectedFile) {
-      const storageRef = ref(
-        this.storage,
-        `book-pdf/${this.selectedFile.name}`
-      );
-      uploadBytes(storageRef, this.selectedFile);
-      this.fileURL = storageRef.fullPath
-    } else{
-      this.fileURL = this.data.bookPDF
-    }
-
-
-    await updateDoc(doc(db, 'books', this.id), {
-      name: this.editBookForm.value.name,
+    this.service.editBook(this.id, {
+      id: this.data.id,
+      title: this.editBookForm.value.name,
       author: this.editBookForm.value.author,
       publisher: this.editBookForm.value.publisher,
       publicationDate: this.editBookForm.value.publicationDate,
       pageCount: this.editBookForm.value.pageCount,
       description: this.editBookForm.value.description,
-      bookCover: this.imageURL,
-      bookPDF: this.fileURL,
-    });
+      cover: this.data.cover,
+      pdfFile: this.data.pdfFile,
+      uid: this.data.uid,
+      uploudDate: this.data.uploudDate,
+      downloadCount: this.data.downloadCount,
+      viewCount: this.data.viewCount,
+    })
+
+
   }
 }
