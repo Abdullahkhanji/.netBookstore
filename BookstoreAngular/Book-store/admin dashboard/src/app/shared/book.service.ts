@@ -23,7 +23,7 @@ export class BookService {
     );
   };
   addBook = (book: any) => {
-    this.http.post(environment.apiBaseURL + 'api/Book', book).subscribe({
+    this.http.post(this.url, book).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -65,4 +65,18 @@ export class BookService {
       },
     });
   }
+  searchBooks = (title: string) => {
+    return this.http.get<Book[]>(`${this.url}/search`, {
+      params: { title }
+    }).pipe(
+      map((res: Book[]) => {
+        return res;
+      }),
+      catchError((err) => {
+        console.error(err);
+        throw err; // Rethrow for the caller to handle
+      })
+    );
+  };
+
 }

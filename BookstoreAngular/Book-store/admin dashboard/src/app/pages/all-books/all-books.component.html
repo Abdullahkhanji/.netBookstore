@@ -15,6 +15,22 @@
         <div class="card-body pb-0">
           <div class="d-flex">
             <h3 class="card-title">Books</h3>
+            <div class="search-bar">
+              <form
+                class="search-form d-flex align-items-center"
+                method="POST"
+                action="#"
+              >
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Search"
+                  title="Enter search keyword"
+                  [(ngModel)]="searchQuery"
+                />
+                <button (click)="onSearch()" title="Search"><i class="bi bi-search"></i></button>
+              </form>
+            </div>
             <button class="btn btn-primary m-3 ms-auto" routerLink="/add-book">
               Add book
             </button>

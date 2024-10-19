@@ -20,6 +20,7 @@ export class AllBooksComponent implements OnInit {
   booksList: any = [];
   bookId: any;
   List: Book[] = [];
+  searchQuery: string = '';
 
   constructor(private elementRef: ElementRef, public service: BookService) {}
 
@@ -89,5 +90,15 @@ export class AllBooksComponent implements OnInit {
     // await deleteDoc(doc(db, 'books', id));
     console.log(id)
     this.service.deleteBook(id)
+  }
+  onSearch() {
+    this.service.searchBooks(this.searchQuery).subscribe({
+      next: (res) => {
+        this.List = res;
+      },
+      error: (err) => {
+        console.error('Error fetching books:', err);
+      }
+    });
   }
 }

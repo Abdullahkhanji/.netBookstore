@@ -50,7 +50,7 @@ namespace BookstoreAPI.Controllers
         }
 
         // PUT: api/Book/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBook(int id, Book book)
         {
@@ -118,6 +118,27 @@ namespace BookstoreAPI.Controllers
         private bool BookExists(int id)
         {
             return (_context.Book?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        // GET: api/Book/search?title=someTitle
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Book>>> SearchBooks(string title)
+        {
+            if (_context.Book == null)
+            {
+                return NotFound();
+            }
+
+            var books = await _context.Book
+                .Where(b => b.Title.Contains(title))  // Filter by title
+                .ToListAsync();
+
+            if (books.Count == 0)
+            {
+                return NotFound("No books found.");
+            }
+
+            return Ok(books);
         }
     }
 }
