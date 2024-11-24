@@ -16,7 +16,7 @@ export class BookService {
       map((res: Book[]) => {
         return res;
       }),
-      catchError((err) => {
+      catchError((err: any) => {
         console.error(err);
         throw err; // rethrow the error for the caller to handle if needed
       })
@@ -24,21 +24,21 @@ export class BookService {
   };
   addBook = (book: any) => {
     this.http.post(this.url, book).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
       },
     });
   };
   deleteBook(id: number) {
     this.http.delete(this.url + `/${id}`).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         location.reload();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
       },
     });
@@ -48,7 +48,7 @@ export class BookService {
       map((res: Book) => {
         return res;
       }),
-      catchError((err) => {
+      catchError((err: any) => {
         console.error(err);
         throw err; // rethrow the error for the caller to handle if needed
       })
@@ -56,11 +56,11 @@ export class BookService {
   }
   editBook(id: number, book: any) {
     this.http.put(this.url + `/${id}`, book).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         location.reload();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
       },
     });
@@ -72,7 +72,7 @@ export class BookService {
       map((res: Book[]) => {
         return res;
       }),
-      catchError((err) => {
+      catchError((err: any) => {
         console.error(err);
         throw err; // Rethrow for the caller to handle
       })

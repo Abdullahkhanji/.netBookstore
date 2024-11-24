@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookstoreAPI.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookstoreAPI.Modals
 {
@@ -7,7 +8,13 @@ namespace BookstoreAPI.Modals
         public BookContext(DbContextOptions options) : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new BookConfiguration());
 
-        public DbSet<Book> Book { get; set; }
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<Book> Books { get; set; }
     }
 }

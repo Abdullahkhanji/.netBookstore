@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookstoreAPI.Modals;
+using MediatR;
+using BookstoreAPI.CQRS.Queries;
 
 namespace BookstoreAPI.Controllers
 {
@@ -14,21 +16,31 @@ namespace BookstoreAPI.Controllers
     public class BookController : ControllerBase
     {
         private readonly BookContext _context;
+        private readonly IMediator _mediator;
 
-        public BookController(BookContext context)
+        public BookController(BookContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
+
 
         // GET: api/Book
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBook()
         {
-          if (_context.Book == null)
-          {
-              return NotFound();
-          }
-            return await _context.Book.ToListAsync();
+            var result = await _mediator.Send(new GetAllBooksQuery());
+            return Ok(result);
+        }
+
+        // POST: api/Book
+        [HttpPost]
+        public async Task<ActionResult<Book>> PostBook(Book book)
+        {
+            _context.Book.Add(book);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBook", new { id = book.Id }, book);
         }
 
         // GET: api/Book/5
@@ -45,9 +57,11 @@ namespace BookstoreAPI.Controllers
             {
                 return NotFound();
             }
+            var book1 = new GetBookByIdResponse();
 
-            return book;
+            return (book.id, book.title);
         }
+
 
         // PUT: api/Book/5
 
@@ -78,21 +92,6 @@ namespace BookstoreAPI.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Book
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book book)
-        {
-          if (_context.Book == null)
-          {
-              return Problem("Entity set 'BookContext.Book'  is null.");
-          }
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBook", new { id = book.Id }, book);
         }
 
         // DELETE: api/Book/5

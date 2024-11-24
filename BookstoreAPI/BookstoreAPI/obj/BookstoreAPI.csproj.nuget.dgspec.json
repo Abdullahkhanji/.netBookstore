@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\programming\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj": {}
+    "A:\\New folder\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj": {}
   },
   "projects": {
-    "D:\\programming\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj": {
+    "A:\\New folder\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\programming\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj",
+        "projectUniqueName": "A:\\New folder\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj",
         "projectName": "BookstoreAPI",
-        "projectPath": "D:\\programming\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj",
-        "packagesPath": "C:\\Users\\AZZAM\\.nuget\\packages\\",
-        "outputPath": "D:\\programming\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\obj\\",
+        "projectPath": "A:\\New folder\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\BookstoreAPI.csproj",
+        "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
+        "outputPath": "A:\\New folder\\.netBookstore\\BookstoreAPI\\BookstoreAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\AZZAM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,12 +38,22 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.4.1, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.3, )"
@@ -82,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
