@@ -53,12 +53,12 @@ export class AddBookComponent implements OnInit {
     const storage = getStorage();
     const auth = getAuth();
     const uid = auth.currentUser?.uid;
-    console.log(this.selectedImage), this.selectedFile
-    const storageRef = ref(storage, `book-cover/${this.selectedImage.name}`);
-    const fileRef = ref(storage, `book-pdf/${this.selectedFile.name}`);
-    uploadBytes(storageRef, this.selectedImage).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-    });
+    // console.log(this.selectedImage), this.selectedFile
+    // const storageRef = ref(storage, `book-cover/${this.selectedImage.name}`);
+    // const fileRef = ref(storage, `book-pdf/${this.selectedFile.name}`);
+    // uploadBytes(storageRef, this.selectedImage).then((snapshot) => {
+    //   console.log('Uploaded a blob or file!');
+    // });
     this.service.addBook({
       title: this.addBookForm.value.name,
       author: this.addBookForm.value.author,
@@ -66,13 +66,13 @@ export class AddBookComponent implements OnInit {
       publisher: this.addBookForm.value.publisher,
       publicationDate: this.addBookForm.value.publicationDate,
       pageCount: this.addBookForm.value.pageCount,
-      cover: storageRef.fullPath,
-      pdfFile: fileRef.fullPath,
+      cover: "storageRef.fullPath",
+      pdfFile: "fileRef.fullPath",
       uid: 0,
       uploudDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       downloadCount: 0,
       viewCount: 0,
-    });
+    })
   }
   // async addBook() {
   //   const auth = getAuth();

@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Book } from './book.model';
 import { catchError, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   List: Book[] = [];
   url = environment.apiBaseURL + 'api/Book';
   getAllBooks = () => {
@@ -26,6 +27,7 @@ export class BookService {
     this.http.post(this.url, book).subscribe({
       next: (res) => {
         console.log(res);
+        this.router.navigate(['/all-books']);
       },
       error: (err) => {
         console.log(err);
