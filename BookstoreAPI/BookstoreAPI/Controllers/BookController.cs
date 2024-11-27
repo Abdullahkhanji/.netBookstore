@@ -4,10 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using BookstoreAPI.Modals;
 using MediatR;
 using BookstoreAPI.CQRS.Queries;
+using BookstoreAPI.CQRS.Queries.GetAllBooks;
+using BookstoreAPI.CQRS.Queries.GetBookById;
+using System.Net;
+using BookstoreAPI.CQRS.Commands.DeleteBook;
+using BookstoreAPI.CQRS.Commands.InsertBook;
+using BookstoreAPI.CQRS.Commands.EditBook;
 
 namespace BookstoreAPI.Controllers
 {
@@ -27,9 +32,20 @@ namespace BookstoreAPI.Controllers
 
         // GET: api/Book
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBook()
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2)
         {
-            var result = await _mediator.Send(new GetAllBooksQuery());
+            var query = new GetAllBooksQuery(pageSize, pageNumber);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        // GET: api/Book/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBook(int id)
+        {
+
+            var result = await _mediator.Send(new GetBookByIdQuery(id));
+
             return Ok(result);
         }
 
@@ -37,107 +53,30 @@ namespace BookstoreAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
-            _context.Book.Add(book);
-            await _context.SaveChangesAsync();
+            var result = await _mediator.Send(new InsertBookCommand(book));
 
-            return CreatedAtAction("GetBook", new { id = book.Id }, book);
-        }
-
-        // GET: api/Book/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
-        {
-          if (_context.Book == null)
-          {
-              return NotFound();
-          }
-            var book = await _context.Book.FindAsync(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-            var book1 = new GetBookByIdResponse();
-
-            return (book.id, book.title);
-        }
-
-
-        // PUT: api/Book/5
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(int id, Book book)
-        {
-            if (id != book.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(book).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(result);
         }
 
         // DELETE: api/Book/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            if (_context.Book == null)
-            {
-                return NotFound();
-            }
-            var book = await _context.Book.FindAsync(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
+            var result = await _mediator.Send(new DeleteBookCommand(id));
 
-            _context.Book.Remove(book);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(result);
         }
 
-        private bool BookExists(int id)
+
+        // PUT: api/Book/5
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutBook(Book book)
         {
-            return (_context.Book?.Any(e => e.Id == id)).GetValueOrDefault();
+            var result = await _mediator.Send(new EditBookCommand(book));
+
+            return Ok(result);
         }
 
-        // GET: api/Book/search?title=someTitle
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Book>>> SearchBooks(string title)
-        {
-            if (_context.Book == null)
-            {
-                return NotFound();
-            }
-
-            var books = await _context.Book
-                .Where(b => b.Title.Contains(title))  // Filter by title
-                .ToListAsync();
-
-            if (books.Count == 0)
-            {
-                return NotFound("No books found.");
-            }
-
-            return Ok(books);
-        }
     }
 }

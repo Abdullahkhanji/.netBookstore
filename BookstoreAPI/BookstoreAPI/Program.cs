@@ -17,6 +17,9 @@ builder.Services.AddMediatR(configuration =>
 builder.Services.AddDbContext<BookContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
+builder.Services.AddAutoMapper(typeof(Program));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

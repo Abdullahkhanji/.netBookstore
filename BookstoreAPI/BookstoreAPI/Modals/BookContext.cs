@@ -15,6 +15,6 @@ namespace BookstoreAPI.Modals
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }
