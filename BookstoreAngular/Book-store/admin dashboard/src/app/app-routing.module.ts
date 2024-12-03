@@ -12,7 +12,11 @@ import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { ModalComponent } from './components/modal/modal.component';
 
-
+export const ROUTES = {
+  HOME: '/dashboard',
+  ALLBOOKS: '/all-books',
+  CONTACT: '/pages-contact',
+};
 
 const routes: Routes = [
   {

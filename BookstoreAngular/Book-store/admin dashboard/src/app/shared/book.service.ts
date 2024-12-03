@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Book } from './book.model';
 import { catchError, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { ROUTES } from '../app-routing.module';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class BookService {
     this.http.post(this.url, book).subscribe({
       next: (res: any) => {
         console.log(res);
-        this.router.navigate(['/all-books']);
+        this.router.navigate([ROUTES.ALLBOOKS]);
       },
       error: (err: any) => {
         console.log(err);
