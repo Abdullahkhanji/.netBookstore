@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookstoreAPI.CQRS.Queries.GetAllBooks;
 using BookstoreAPI.Modals;
 using MediatR;
@@ -16,11 +17,16 @@ namespace BookstoreAPI.CQRS.Queries.GetBookById
             _mapper = mapper;
             _db = db;
         }
+
         public async Task<BookDTO> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
-            var book = await _db.Book.FirstOrDefaultAsync(b => b.Id == request.Id);
-            return _mapper.Map<BookDTO>(book);
-        }
+            var bookDto = await _db.Book
+                .Where(b => b.Id == request.Id)                     // Filter by ID
+                .ProjectTo<BookDTO>(_mapper.ConfigurationProvider)  // Map directly to BookDTO
+                .FirstOrDefaultAsync(cancellationToken);            // Get the first or default
 
+            return bookDto; // Return the mapped DTO
+        }
     }
+
 }
