@@ -20,6 +20,7 @@ namespace BookstoreAPI.CQRS.Commands.EditBook
                 throw new KeyNotFoundException($"Book with ID {request.book.Id} not found.");
             }
             existingBook = request.book;
+            existingBook.LastUpdate = DateTime.Now;
             _db.SaveChanges();
 
             return existingBook;

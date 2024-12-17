@@ -18,7 +18,7 @@ namespace BookstoreAPI.CQRS.Queries.GetAllBooks
         }
         public async Task<PaginatedBooksDTO> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            var query = _db.Book.AsQueryable(); // Start with all books
+            var query = _db.Book.AsQueryable().Where(b => !b.IsDeleted); // Start with all books
 
             // Apply pagination (Skip and Take)
             var booksQuery = query.Skip((request.PageNumber - 1) * request.PageSize)  // Skip previous pages

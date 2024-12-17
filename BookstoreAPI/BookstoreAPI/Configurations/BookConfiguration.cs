@@ -1,6 +1,7 @@
 ﻿using BookstoreAPI.Modals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 
 namespace BookstoreAPI.Configurations
@@ -16,7 +17,8 @@ namespace BookstoreAPI.Configurations
             builder.Property(b => b.Title)
                 .IsRequired()
                 .HasMaxLength(100);
-
+            builder.Property(b => b.IsDeleted)
+                .HasConversion<byte>();
         }
     }
 }

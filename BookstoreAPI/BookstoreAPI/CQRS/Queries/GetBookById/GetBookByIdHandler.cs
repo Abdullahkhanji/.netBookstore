@@ -21,7 +21,7 @@ namespace BookstoreAPI.CQRS.Queries.GetBookById
         public async Task<BookDTO> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
             var bookDto = await _db.Book
-                .Where(b => b.Id == request.Id)                     // Filter by ID
+                .Where(b => b.Id == request.Id && !b.IsDeleted)     // Filter by ID
                 .ProjectTo<BookDTO>(_mapper.ConfigurationProvider)  // Map directly to BookDTO
                 .FirstOrDefaultAsync(cancellationToken);            // Get the first or default
 

@@ -260,8 +260,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "uploudDate": {
+          "lastUpdate": {
             "type": "string",
+            "format": "date-time",
             "nullable": true
           },
           "downloadCount": {
@@ -271,6 +272,9 @@
           "viewCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "isDeleted": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

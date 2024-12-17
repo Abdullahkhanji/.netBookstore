@@ -15,8 +15,9 @@ namespace BookstoreAPI.Modals
         public string Cover { get; set; }
         public string PDFFile { get; set; }
         public int UID { get; set; }
-        public string UploudDate { get; set; }
+        public DateTime? LastUpdate { get; set; }
         public int DownloadCount { get; set; }
         public int ViewCount { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

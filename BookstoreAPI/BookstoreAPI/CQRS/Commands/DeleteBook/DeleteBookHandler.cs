@@ -19,7 +19,9 @@ namespace BookstoreAPI.CQRS.Commands.DeleteBook
             {
                 throw new KeyNotFoundException($"Book with ID {request.Id} not found.");
             }
-            _db.Book.Remove(bookToRemove);
+            bookToRemove.LastUpdate = DateTime.Now;
+            bookToRemove.IsDeleted = true;
+            //_db.Book.Remove(bookToRemove);
             _db.SaveChanges();
             return await Task.FromResult(bookToRemove); ;
         }

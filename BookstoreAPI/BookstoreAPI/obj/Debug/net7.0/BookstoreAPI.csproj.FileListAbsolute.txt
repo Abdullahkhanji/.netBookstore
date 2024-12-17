@@ -770,3 +770,4 @@ D:\programming\.netBookstore\BookstoreAPI\BookstoreAPI\obj\Debug\net7.0\staticwe
 D:\programming\.netBookstore\BookstoreAPI\BookstoreAPI\obj\Debug\net7.0\staticwebassets\msbuild.BookstoreAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 D:\programming\.netBookstore\BookstoreAPI\BookstoreAPI\obj\Debug\net7.0\staticwebassets.upToDateCheck.txt
 D:\programming\.netBookstore\BookstoreAPI\BookstoreAPI\obj\Debug\net7.0\Bookstor.DA1A35D2.Up2Date
+D:\programming\.netBookstore\BookstoreAPI\BookstoreAPI\bin\Debug\net7.0\System.Formats.Asn1.dll

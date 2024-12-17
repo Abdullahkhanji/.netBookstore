@@ -12,6 +12,8 @@ namespace BookstoreAPI.CQRS.Commands.InsertBook
         }
         public async Task<Book> Handle(InsertBookCommand request, CancellationToken cancellationToken)
         {
+            request.book.LastUpdate = DateTime.Now;
+            request.book.IsDeleted = false;
             await _db.Book.AddAsync(request.book);
             _db.SaveChanges();
             return await Task.FromResult(request.book);
