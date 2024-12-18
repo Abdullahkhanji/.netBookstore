@@ -31,6 +31,9 @@
                 <button (click)="onSearch()" title="Search"><i class="bi bi-search"></i></button>
               </form>
             </div>
+            <div class="flex justify-content-center">
+              <p (click)="GoToPreviousPage()">previous page</p> <p (click)="GoToNextPage()" >next page</p>
+            </div>
             <button class="btn btn-primary m-3 ms-auto" routerLink="/add-book">
               Add book
             </button>

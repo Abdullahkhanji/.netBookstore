@@ -32,9 +32,10 @@ namespace BookstoreAPI.Controllers
 
         // GET: api/Book
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2)
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks(int PageNumber, [FromQuery] int pageSize = 2)
         {
-            var query = new GetAllBooksQuery(pageSize, pageNumber);
+
+            var query = new GetAllBooksQuery(pageSize, PageNumber);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

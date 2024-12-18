@@ -5,6 +5,7 @@ import { Book } from './book.model';
 import { catchError, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { ROUTES } from '../app-routing.module';
+import { paginatedBook } from './paginatedBook.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,20 @@ export class BookService {
   constructor(private http: HttpClient, private router: Router) {}
   List: Book[] = [];
   url = environment.apiBaseURL + 'api/Book';
-  getAllBooks = () => {
-    return this.http.get<Book[]>(this.url).pipe(
-      map((res: Book[]) => {
+  getAllBooks = (PageNumber: number) => {
+    const params = {
+      PageNumber: PageNumber.toString()
+    };
+  
+    return this.http.get<paginatedBook>(this.url, { params }).pipe(
+      map((data: any) => {
+        console.log(data)
+        const res: paginatedBook = {
+          booksList: data.books,
+          TotalCount: data.totalCount,
+          PageNumber: data.pageNumber,
+          PageSize: data.pageSize,
+        };
         return res;
       }),
       catchError((err: any) => {
@@ -69,17 +81,18 @@ export class BookService {
     });
   }
   searchBooks = (title: string) => {
-    return this.http.get<Book[]>(`${this.url}/search`, {
-      params: { title }
-    }).pipe(
-      map((res: Book[]) => {
-        return res;
-      }),
-      catchError((err: any) => {
-        console.error(err);
-        throw err; // Rethrow for the caller to handle
+    return this.http
+      .get<Book[]>(`${this.url}/search`, {
+        params: { title },
       })
-    );
+      .pipe(
+        map((res: Book[]) => {
+          return res;
+        }),
+        catchError((err: any) => {
+          console.error(err);
+          throw err; // Rethrow for the caller to handle
+        })
+      );
   };
-
 }

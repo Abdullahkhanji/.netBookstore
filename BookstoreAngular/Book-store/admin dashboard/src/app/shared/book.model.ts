@@ -9,7 +9,6 @@ export class Book {
     cover: string = ""
     pdfFile: string = ""
     uid: number = 0
-    uploudDate: string = ""
     downloadCount: number = 0
     viewCount: number = 0
 }

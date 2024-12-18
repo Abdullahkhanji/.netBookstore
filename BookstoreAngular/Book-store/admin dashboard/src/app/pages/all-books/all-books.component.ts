@@ -10,6 +10,7 @@ import {
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { Book } from 'src/app/shared/book.model';
 import { BookService } from 'src/app/shared/book.service';
+import { paginatedBook } from 'src/app/shared/paginatedBook.model';
 @Component({
   selector: 'app-all-books',
   templateUrl: './all-books.component.html',
@@ -21,9 +22,10 @@ export class AllBooksComponent implements OnInit {
   bookId: any;
   List: Book[] = [];
   searchQuery: string = '';
+  NumberOfPages = 0;
 
   constructor(private elementRef: ElementRef, public service: BookService) {}
-
+  PageNumber = 1;
   ngOnInit(): void {
     this.getBooks();
     var s = document.createElement('script');
@@ -33,22 +35,26 @@ export class AllBooksComponent implements OnInit {
   }
 
   getBooks() {
-    this.service.getAllBooks().subscribe({
-      next: (books: Book[]) => {
-        books.forEach((book) => {
+    this.service.getAllBooks(this.PageNumber).subscribe({
+      next: (books: paginatedBook) => {
+        console.log(books.TotalCount);
+        this.List = [];
+        this.NumberOfPages = Math.ceil(books.TotalCount / 2);
+        console.log('Books data:', books);
+        books.booksList.forEach((book) => {
           let index: any = book;
-          const storage = getStorage();
-          const storageRef = ref(storage, book.cover);
-          const fileRef = ref(storage, book.pdfFile);
-          getDownloadURL(storageRef).then((url) => {
-            console.log(url);
-            index.selectedImage = url;
-          });
-          getDownloadURL(fileRef).then((url) => {
-            index.selectedFile = url;
-          });
+          // const storage = getStorage();
+          // const storageRef = ref(storage, book.cover);
+          // const fileRef = ref(storage, book.pdfFile);
+          // getDownloadURL(storageRef).then((url) => {
+          //   console.log(url);
+          //   index.selectedImage = url;
+          // });
+          // getDownloadURL(fileRef).then((url) => {
+          //   index.selectedFile = url;
+          // });
           this.List.push(index);
-          console.log(this.List)
+          console.log(this.List);
         });
       },
       error: (err) => {
@@ -56,7 +62,22 @@ export class AllBooksComponent implements OnInit {
       },
     });
   }
-
+  GoToPreviousPage = () => {
+    if (this.PageNumber > 1) {
+      this.PageNumber = this.PageNumber - 1;
+      this.getBooks();
+    } else {
+      this.getBooks();
+    }
+  };
+  GoToNextPage = () => {
+    if (this.PageNumber < this.NumberOfPages) {
+      this.PageNumber = this.PageNumber + 1;
+      this.getBooks();
+    } else {
+      this.getBooks();
+    }
+  };
   // async readBooks() {
   //   let db = getFirestore();
   //   let snapshot = await getDocs(collection(db, 'books'));
@@ -88,8 +109,8 @@ export class AllBooksComponent implements OnInit {
     // let db = getFirestore();
     // console.log(id);
     // await deleteDoc(doc(db, 'books', id));
-    console.log(id)
-    this.service.deleteBook(id)
+    console.log(id);
+    this.service.deleteBook(id);
   }
   onSearch() {
     this.service.searchBooks(this.searchQuery).subscribe({
@@ -98,7 +119,7 @@ export class AllBooksComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching books:', err);
-      }
+      },
     });
   }
 }

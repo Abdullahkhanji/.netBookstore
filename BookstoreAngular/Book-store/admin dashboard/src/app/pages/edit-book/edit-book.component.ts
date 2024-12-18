@@ -36,9 +36,8 @@ export class EditBookComponent implements OnInit {
     cover: '',
     pdfFile: '',
     uid: 0,
-    uploudDate: '',
     downloadCount: 0,
-    viewCount: 0
+    viewCount: 0,
   };
 
   constructor(
@@ -50,7 +49,7 @@ export class EditBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getBookData()
+    this.getBookData();
 
     // console.log(this.id);
   }
@@ -65,15 +64,13 @@ export class EditBookComponent implements OnInit {
     this.service.getBookInfo(this.id).subscribe({
       next: (book: Book) => {
         this.data = book;
-        console.log(this.data)
+        console.log(this.data);
         this.setFormValue();
       },
       error: (err: any) => {
         console.error('Error fetching books', err);
       },
     });
-
-
   }
 
   editBookForm = this.formBuilder.group({
@@ -95,7 +92,6 @@ export class EditBookComponent implements OnInit {
     });
   }
   async editBook() {
-
     this.service.editBook(this.id, {
       id: this.data.id,
       title: this.editBookForm.value.name,
@@ -104,14 +100,11 @@ export class EditBookComponent implements OnInit {
       publicationDate: this.editBookForm.value.publicationDate,
       pageCount: this.editBookForm.value.pageCount,
       description: this.editBookForm.value.description,
-      cover: this.data.cover,
-      pdfFile: this.data.pdfFile,
+      cover: 'this.data.cover',
+      pdfFile: 'this.data.pdfFile',
       uid: this.data.uid,
-      uploudDate: this.data.uploudDate,
       downloadCount: this.data.downloadCount,
       viewCount: this.data.viewCount,
-    })
-
-
+    });
   }
 }
