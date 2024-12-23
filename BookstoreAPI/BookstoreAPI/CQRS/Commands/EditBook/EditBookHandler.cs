@@ -1,4 +1,5 @@
 ﻿using BookstoreAPI.Modals;
+using FluentValidation;
 using MediatR;
 
 namespace BookstoreAPI.CQRS.Commands.EditBook
@@ -21,6 +22,13 @@ namespace BookstoreAPI.CQRS.Commands.EditBook
             }
             existingBook = request.book;
             existingBook.LastUpdate = DateTime.Now;
+            var validator = new BookValidator();
+            var validationResult = validator.Validate(request.book);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
             _db.SaveChanges();
 
             return existingBook;
