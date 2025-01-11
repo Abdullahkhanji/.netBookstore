@@ -1,4 +1,5 @@
-using BookstoreAPI.Modals;
+using BookstoreAPI.Application.Interfaces;
+using BookstoreAPI.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddMediatR(configuration =>
 
 builder.Services.AddDbContext<BookContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+builder.Services.AddScoped<IBookContext>(provider => provider.GetRequiredService<BookContext>());
 
 builder.Services.AddAutoMapper(typeof(Program));
 
