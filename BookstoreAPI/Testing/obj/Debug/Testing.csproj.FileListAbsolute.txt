@@ -1,0 +1,2 @@
+D:\programming\.netBookstore\BookstoreAPI\Testing\obj\Debug\Testing.csproj.AssemblyReference.cache
+D:\programming\.netBookstore\BookstoreAPI\Testing\obj\Debug\Testing.csproj.CoreCompileInputs.cache

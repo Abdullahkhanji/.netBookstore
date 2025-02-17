@@ -1,4 +1,5 @@
-﻿using BookstoreAPI.Application.Interfaces;
+﻿using BookstoreAPI.Application.Exceptions;
+using BookstoreAPI.Application.Interfaces;
 using BookstoreAPI.Domain.Entities;
 using MediatR;
 
@@ -17,7 +18,7 @@ namespace BookstoreAPI.Application.CQRS.Commands.DeleteBook
             var bookToRemove = await _db.Book.FindAsync(request.Id);
             if (bookToRemove == null)
             {
-                throw new KeyNotFoundException($"Book with ID {request.Id} not found.");
+                throw new BookNotFoundException(request.Id.ToString());
             }
             bookToRemove.LastUpdate = DateTime.Now;
             bookToRemove.IsDeleted = true;
